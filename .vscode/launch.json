@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Rodar com Raylib",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "Build com raylib"
+        }
+    ]
+}
