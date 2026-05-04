@@ -11,11 +11,11 @@ int main(){
     while(!WindowShouldClose()){
         offset += 5.0f;
         if(offset >= 100){
-            offset -0;
+            offset = 0;
         }
-        BeginDrawing();
         ClearBackground(DARKGRAY);
         
+        //definição das teclas 
         if (IsKeyDown(KEY_RIGHT)){
             carro.x += 5;
         }
@@ -28,6 +28,16 @@ int main(){
         if(IsKeyDown(KEY_DOWN)){
             carro.y += 5;
         }
+
+        //limites da pista]
+        if(carro.x < 55){
+            carro.x=55;
+        }
+        if(carro.x + carro.width > 745){
+            carro.x=745-carro.width;
+        }
+
+        BeginDrawing();
 
         DrawRectangleRec(carro, RED);
         
