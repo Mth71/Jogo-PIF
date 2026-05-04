@@ -1,13 +1,42 @@
 #include <stdio.h> 
 #include "raylib.h"
+#include <stdlib.h>
+#include <time.h>
+
+//criação dos bots
+typedef struct Bot{
+    Rectangle carro_bot;
+    float velocidade;
+    Color cor;
+}bot;
+
+bot criarBot(){
+    bot b;
+    b.carro_bot=(Rectangle){55+ rand()%635,-100,60,100};
+    b.velocidade=2.0f +(rand()%3);
+    b.cor=(Color){rand() % 255,rand() % 255,rand() % 255, 255};
+    return b;
+
+}
 
 int main(){
     
     InitWindow(800, 600, "jogo");
     SetTargetFPS(60);
-
+    srand(time(NULL));
+    
+    //carro do jogador
     Rectangle carro = {370, 500, 60,100};
+    
     float offset = 0;
+
+
+    bot bots[3];
+    bots[0]=criarBot();
+    bots[1]=criarBot();
+    bots[2]=criarBot();
+
+
     while(!WindowShouldClose()){
         offset += 5.0f;
         if(offset >= 100){
@@ -37,6 +66,11 @@ int main(){
             carro.x=745-carro.width;
         }
 
+        //movimentação bots
+        for(int i=0; i<3;i++){
+            bots[i].carro_bot.y += bots[i].velocidade;
+        }
+
         BeginDrawing();
 
         DrawRectangleRec(carro, RED);
@@ -49,6 +83,15 @@ int main(){
         // bordas da pista
         DrawRectangle(40,0,15,750, WHITE); // borda da esquerda
         DrawRectangle(745,0,15,750, WHITE); // borda direita
+        
+        //desenho dos bots
+        for(int i =0;i<3;i++){
+            DrawRectangleRec(bots[i].carro_bot, bots[i].cor);
+        }
+        
+        
+        
+        
         EndDrawing();
     }
     CloseWindow();
