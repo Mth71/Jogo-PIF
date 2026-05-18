@@ -12,20 +12,20 @@ typedef enum
 
 int main(void) {
 
-    const screenWhidth = 1280;
-    const sreenHeight = 720;
+    const int screenWhidth = 1280;
+    const int sreenHeight = 720;
 
     InitWindow(screenWhidth, sreenHeight, "Retro Race");
 
     SetTargetFPS(60);
 
-    Texture2D manuBackground = LoadTexture("assets/menu.png");
+    Texture2D menuBackground = LoadTexture("assets/menu.png");
 
     GameScreen telaAtual = MENU;
 
-    Rectangle botaoIniciar = {365, 355, 550, 85};
-    Rectangle botaoConfig  = {365, 470, 550, 85};
-    Rectangle botaoTop10   = {365, 585, 550, 85};
+    Rectangle botaoIniciar = {400, 355, 480, 85};
+    Rectangle botaoConfig  = {400, 455, 480, 85};
+    Rectangle botaoTop10   = {400, 555, 480, 85};
 
     while (!WindowShouldClose()){
         
@@ -56,9 +56,33 @@ int main(void) {
                 
                 telaAtual = TOP10;
             }
+
+            BeginDrawing();
+
+            ClearBackground(BLACK);
+
+            DrawTexture(menuBackground, 0, 0, WHITE);
+
+            if(hoverIniciar){
+
+                DrawRectangleLinesEx(botaoIniciar, 4, GREEN);
+            }
+
+            if(hoverConfig){
+
+                DrawRectangleLinesEx(botaoConfig, 4, SKYBLUE);
+            }
+
+            if(hoverTop10){
+
+                DrawRectangleLinesEx(botaoTop10, 4, YELLOW);
+            }
             
+            EndDrawing();
 
         }
+
+
 
     }
     
